@@ -1,1 +1,1 @@
-org.springframework.boot.autoconfigure.EnableAutoConfiguration=com.beelego.QuartzUIAutoConfig
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=com.beelego.QuartzUIAutoConfig,com.beelego.QuartzAutoConfig

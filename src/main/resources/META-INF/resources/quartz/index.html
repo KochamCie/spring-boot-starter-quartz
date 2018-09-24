@@ -9,199 +9,210 @@
     <script src="https://unpkg.com/element-ui@2.0.5/lib/index.js"></script>
 
     <style>
-        #top {
-            background: #20A0FF;
-            padding: 5px;
-            overflow: hidden
+        .el-table__body-wrapper{
+            overflow: hidden;
+        }
+        .pagination-container {
+            margin-top: 30px;
+        }
+        .filter-container {
+            padding-bottom: 10px;
+        }
+        #test {
+            margin: 20px;
+        }
+        .filter-item {
+            display: inline-block;
+            vertical-align: middle;
+            margin-bottom: 10px;
         }
     </style>
 
 </head>
 <body>
+
+
 <div id="test">
+    <div class="filter-container">
+        <el-input @keyup.enter.native="handleFilter" style="width:200px;" class="filter-item" placeholder="job name" v-model="listQuery.title"></el-input>
+        <el-button class="filter-item" type="primary" size="medium"  icon="el-icon-search" @click="handleFilter">search</el-button>
+        <el-button class="filter-item" @click="handleAdd" type="primary" size="medium" icon="el-icon-info" size="small">handleAdd</el-button>
+    </div>
+    <el-table
+            :data="tableData"
+            border
+            highlight-current-row
+            :cell-style="cellStyle"
+            style="width: 100%;overflow: hidden">
+        <el-table-column
+                prop="jobName"
+                label="Job Name"
+                sortable
+                >
+        </el-table-column>
 
-    <div id="top">
-        <el-button type="text" @click="handleAdd" style="color:white;float:right;margin-right:50px;">添加</el-button>
-        </span>
+        <el-table-column
+                prop="jobClassName"
+                label="Target"
+                align="center"
+                sortable>
+        </el-table-column>
+
+        <el-table-column
+                prop="triggerName"
+                label="Trigger Name"
+                align="center"
+                sortable>
+        </el-table-column>
+        <el-table-column
+                prop="jobStatus"
+                label="Job Status"
+                align="center"
+                sortable>
+        </el-table-column>
+
+        <el-table-column
+                prop="cronExpression"
+                label="Cron"
+                align="center"
+                sortable>
+        </el-table-column>
+
+        <el-table-column
+                prop="description"
+                label="Description"
+                sortable
+                align="center"
+                show-overflow-tooltip>
+        </el-table-column>
+
+        <el-table-column
+                prop="jobData"
+                :formatter="handlerJobData"
+                label="Customize"
+                sortable
+                align="center"
+                show-overflow-tooltip>
+        </el-table-column>
+
+        <el-table-column label="actions" width="333px" align="center">
+            <template scope="scope">
+                <el-button
+                        size="small"
+                        :type="scope.row.jobStatus=='NORMAL'?'info':'warning'"
+                        v-text="scope.row.jobStatus == 'NORMAL'?'Pause':'Resume'"
+                        @click="triggerOption(scope.$index, scope.row, scope.row.jobStatus == 'NORMAL'?'PAUSE':'RESUME')">
+                </el-button>
+
+                <el-button
+                        size="small"
+                        type="primary"
+                        @click="triggerOption(scope.$index, scope.row, 'TRIGGER')">Trigger
+                </el-button>
+
+                <el-button
+                        size="small"
+                        type="success"
+                        @click="handleUpdate(scope.$index, scope.row)">Edit
+                </el-button>
+
+
+                <el-button
+                        size="small"
+                        type="danger"
+                        @click="triggerOption(scope.$index, scope.row, 'DELETE')">Delete
+                </el-button>
+
+
+            </template>
+        </el-table-column>
+    </el-table>
+
+    <div class="pagination-container">
+        <el-pagination
+                @size-change="handleSizeChange"
+                @current-change="handleCurrentChange"
+                :current-page="currentPage"
+                :page-sizes="[10, 20, 30, 40]"
+                :page-size="pagesize"
+                layout="total, sizes, prev, pager, next, jumper"
+                :total="totalCount">
+        </el-pagination>
     </div>
 
-    <br/>
-
-    <div style="margin-top:15px">
-
-        <el-table
-                ref="testTable"
-                :data="tableData"
-                style="width:100%"
-        >
-            <el-table-column
-                    prop="jobName"
-                    label="任务名称"
-                    sortable
-                    show-overflow-tooltip>
-            </el-table-column>
-
-            <el-table-column
-                    prop="jobClassName"
-                    label="任务类名"
-                    sortable>
-            </el-table-column>
-
-            <el-table-column
-                    prop="triggerName"
-                    label="触发器名称"
-                    sortable>
-            </el-table-column>
-            <el-table-column
-                    prop="jobStatus"
-                    label="状态"
-                    sortable>
-            </el-table-column>
-
-            <el-table-column
-                    prop="cronExpression"
-                    label="表达式"
-                    sortable>
-            </el-table-column>
-
-            <el-table-column
-                    prop="description"
-                    label="描述"
-                    sortable>
-            </el-table-column>
-
-            <el-table-column
-                    prop="jobData"
-                    :formatter="handlerJobData"
-                    label="自定义"
-                    sortable>
-            </el-table-column>
-
-            <el-table-column label="操作" width="300">
-                <template scope="scope">
-
-                    <el-button
-                            size="small"
-                            :type="scope.row.jobStatus=='NORMAL'?'info':'warning'"
-                            v-text="scope.row.jobStatus == 'NORMAL'?'暂停':'恢复'"
-                            @click="triggerOption(scope.$index, scope.row, scope.row.jobStatus == 'NORMAL'?'PAUSE':'RESUME')">
-                    </el-button>
-
-                    <el-button
-                            size="small"
-                            type="primary"
-                            @click="triggerOption(scope.$index, scope.row, 'TRIGGER')">触发
-                    </el-button>
-
-                    <el-button
-                            size="small"
-                            type="success"
-                            @click="handleUpdate(scope.$index, scope.row)">修改
-                    </el-button>
-
-
-                    <el-button
-                            size="small"
-                            type="danger"
-                            @click="triggerOption(scope.$index, scope.row, 'DELETE')">删除
-                    </el-button>
-
-
-                </template>
-            </el-table-column>
-        </el-table>
-
-        <div align="center">
-            <el-pagination
-                    @size-change="handleSizeChange"
-                    @current-change="handleCurrentChange"
-                    :current-page="currentPage"
-                    :page-sizes="[10, 20, 30, 40]"
-                    :page-size="pagesize"
-                    layout="total, sizes, prev, pager, next, jumper"
-                    :total="totalCount">
-            </el-pagination>
-        </div>
-    </div>
-
-    <el-dialog title="添加任务" :visible.syn="dialogFormVisible" @close='dialogFormVisible = false'>
+    <el-dialog title="Add Quartz Job" :visible.syn="dialogFormVisible" @close='dialogFormVisible = false'>
         <el-form :model="form">
-            <el-form-item label="任务名称" label-width="120px" style="width:66%">
+            <el-form-item label="Job Name" label-width="120px" style="width:66%">
                 <el-input v-model="form.jobName" auto-complete="off"></el-input>
             </el-form-item>
-            <el-form-item label="任务分组" label-width="120px" style="width:66%">
+            <el-form-item label="Job Group" label-width="120px" style="width:66%">
                 <el-input v-model="form.jobGroup" auto-complete="off"></el-input>
             </el-form-item>
-            <el-form-item label="任务类名" label-width="120px" style="width:66%">
+            <el-form-item label="Target" label-width="120px" style="width:66%">
                 <el-input v-model="form.jobClassName" auto-complete="off"></el-input>
             </el-form-item>
-            <el-form-item label="表达式" label-width="120px" style="width:66%">
+            <el-form-item label="Cron" label-width="120px" style="width:66%">
                 <el-input v-model="form.cronExpression" auto-complete="off"></el-input>
             </el-form-item>
-            <el-form-item label="描述" label-width="120px" style="width:66%">
+            <el-form-item label="Description" label-width="120px" style="width:66%">
                 <el-input v-model="form.description" auto-complete="off"></el-input>
             </el-form-item>
         </el-form>
         <div slot="footer" class="dialog-footer">
-            <el-button @click="dialogFormVisible = false">取 消</el-button>
-            <el-button type="primary" @click="add(1, form, 'SCHEDULE')">确 定</el-button>
+            <el-button @click="dialogFormVisible = false">Cancel</el-button>
+            <el-button type="primary" @click="add(1, form, 'SCHEDULE')">Confirm</el-button>
         </div>
     </el-dialog>
 
-    <el-dialog title="修改任务" :visible.syn="updateFormVisible" @close='updateFormVisible = false'>
+    <el-dialog title="Edit Quartz Job" :visible.syn="updateFormVisible" @close='updateFormVisible = false'>
         <el-form :model="updateform">
-            <el-form-item label="表达式" label-width="120px" style="width:66%">
+            <el-form-item label="Cron" label-width="120px" style="width:66%">
                 <el-input v-model="updateform.cronExpression" auto-complete="off"></el-input>
             </el-form-item>
-            <el-form-item label="描述" label-width="120px" style="width:66%">
+            <el-form-item label="Description" label-width="120px" style="width:66%">
                 <el-input v-model="updateform.description" auto-complete="off"></el-input>
             </el-form-item>
 
-            <el-form-item label="自定义" label-width="120px" style="width:66%">
+            <el-form-item label="Customize" label-width="120px" style="width:66%">
                 <el-input v-model="updateform.jobData" auto-complete="off"></el-input>
             </el-form-item>
         </el-form>
         <div slot="footer" class="dialog-footer">
-            <el-button @click="updateFormVisible = false">取 消</el-button>
-            <el-button type="primary" @click="update">确 定</el-button>
+            <el-button @click="updateFormVisible = false">Cancel</el-button>
+            <el-button type="primary" @click="update">Confirm</el-button>
         </div>
     </el-dialog>
-
 </div>
 
 <footer align="center">
-    <p>&copy; Quartz 任务管理</p>
+    <p>&copy; Quartz Management UI</p>
 </footer>
 
 <script>
     var vue = new Vue({
         el: "#test",
         data: {
-            //表格当前页数据
+            // current table data
             tableData: [],
 
-            //请求的URL
-            url: 'internal/schedule',
-
-            //默认每页数据量
+            // page size
             pagesize: 10,
 
-            //当前页码
             currentPage: 1,
 
-            //查询的页码
+            // start page
             start: 1,
 
-            //默认数据总数
+            // total count
             totalCount: 1000,
 
-            //添加对话框默认可见性
+            // dialog
             dialogFormVisible: false,
 
-            //修改对话框默认可见性
+            // edit dialog
             updateFormVisible: false,
 
-            //提交的表单
+            //
             form: {
                 jobName: '',
                 jobGroup: '',
@@ -209,7 +220,6 @@
                 description: '',
                 jobClassName: 'com.beelego.demo.DemoJob'
             },
-
             updateform: {
                 index: '',
                 jobName: '',
@@ -217,12 +227,18 @@
                 cronExpression: '',
                 description: '',
                 jobData: ''
+            },
+            listQuery: {
+                title: ''
             }
         },
 
+        table :{
+          title : 'title'
+        },
         methods: {
 
-            //从服务器读取数据
+            // fetch data
             loadData: function (pageNum, pageSize) {
                 this.$http.get('/quartz/job?' + 'pageNum=' + pageNum + '&pageSize=' + pageSize).then(function (res) {
                     console.log(res)
@@ -251,7 +267,7 @@
                     console.log('failed');
                 })
             },
-            //添加
+            // add a job
             add: function (index, row, option) {
                 this.$http.post('/quartz/job', {
                     "jobName": row.jobName,
@@ -268,7 +284,7 @@
                     console.log('failed');
                 });
             },
-            //更新
+            // update a job
             handleUpdate: function (index, row) {
                 console.log(row)
                 this.updateFormVisible = true;
@@ -279,35 +295,46 @@
                 this.updateform.index = index;
                 this.updateform.jobData = JSON.stringify(row.jobData);
             },
-            //更新任务
+            // update a job
             update: function () {
                 this.add(this.updateform.index, this.updateform, "RESCHEDULE");
                 this.updateFormVisible = false;
             },
 
-            //搜索
+            // searching
             search: function () {
                 this.loadData(this.currentPage, this.pagesize);
             },
 
-            //弹出对话框
+            //
             handleAdd: function () {
                 this.dialogFormVisible = true;
             },
 
-            //每页显示数据量变更
+            //
             handleSizeChange: function (val) {
                 this.pagesize = val;
                 this.loadData(this.currentPage, this.pagesize);
             },
 
-            //页码变更
+            //
             handleCurrentChange: function (val) {
                 this.currentPage = val;
                 this.loadData(this.currentPage, this.pagesize);
             },
             handlerJobData: function (row, column) {
                 return JSON.stringify(row.jobData);
+            },
+            cellStyle: function({row, column, rowIndex, columnIndex}){
+                console.log("cell style");
+                if(columnIndex === 1 || columnIndex === 6){
+                    return 'background:pink;font-size:12px'
+                }else{
+                    return ''
+                }
+            },
+            handleFilter: function() {
+                this.loadData(1, 20)
             }
 
         },
@@ -315,7 +342,7 @@
 
     });
 
-    //载入数据
+    //
     vue.loadData(vue.currentPage, vue.pagesize);
 </script>
 

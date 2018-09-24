@@ -5,7 +5,7 @@
 
     <groupId>com.beelego</groupId>
     <artifactId>spring-boot-starter-quartz</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>1.0.1-RELEASE</version>
     <packaging>jar</packaging>
 
     <name>spring-boot-starter-quartz</name>
