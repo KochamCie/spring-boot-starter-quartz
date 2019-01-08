@@ -24,6 +24,12 @@ public class QuartzUIAutoConfig implements WebMvcConfigurer {
         if (quartzProperties.isEnabled()) {
             registry.addResourceHandler("quartz/index.html")
                     .addResourceLocations("classpath:/META-INF/resources/");
+            registry.addResourceHandler("quartz/jobrec.html")
+                    .addResourceLocations("classpath:/META-INF/resources/");
+            registry.addResourceHandler("jobrec")
+                    .addResourceLocations("classpath:/META-INF/resources/");
+            registry.addResourceHandler("quartz/jobrec22.html")
+                    .addResourceLocations("classpath:/META-INF/resources/");
             registry.addResourceHandler("vue/")
                     .addResourceLocations("classpath:/META-INF/resources/");
         } else {

@@ -11,6 +11,11 @@ import org.springframework.scheduling.quartz.QuartzJobBean;
 public class DemoJob extends QuartzJobBean {
     @Override
     protected void executeInternal(JobExecutionContext jobExecutionContext) throws JobExecutionException {
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         System.out.println(System.currentTimeMillis());
     }
 }

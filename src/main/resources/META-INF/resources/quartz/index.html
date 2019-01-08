@@ -52,6 +52,19 @@
         </el-table-column>
 
         <el-table-column
+                prop="jobName"
+                label="Job Name"
+                sortable
+                >
+            <template slot-scope="scope">
+                <a :href="'/view/jobrec'"
+                   target="_blank"
+                   class="">{{scope.row.jobName}}</a>
+            </template>
+        </el-table-column>
+
+
+        <el-table-column
                 prop="jobClassName"
                 label="Target"
                 align="center"
