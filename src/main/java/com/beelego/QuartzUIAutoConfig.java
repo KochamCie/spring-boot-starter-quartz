@@ -17,24 +17,22 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 @EnableConfigurationProperties(QuartzProperties.class)
 public class QuartzUIAutoConfig implements WebMvcConfigurer {
 
-    @Autowired
-    private QuartzProperties quartzProperties;
+  @Autowired
+  private QuartzProperties quartzProperties;
 
-    public void addResourceHandlers(ResourceHandlerRegistry registry) {
-        if (quartzProperties.isEnabled()) {
-            registry.addResourceHandler("quartz/index.html")
-                    .addResourceLocations("classpath:/META-INF/resources/");
-            registry.addResourceHandler("quartz/jobrec.html")
-                    .addResourceLocations("classpath:/META-INF/resources/");
-            registry.addResourceHandler("jobrec")
-                    .addResourceLocations("classpath:/META-INF/resources/");
-            registry.addResourceHandler("quartz/jobrec22.html")
-                    .addResourceLocations("classpath:/META-INF/resources/");
-            registry.addResourceHandler("vue/")
-                    .addResourceLocations("classpath:/META-INF/resources/");
-        } else {
-            registry.addResourceHandler("quartz/index.html")
-                    .addResourceLocations("classpath:/META-INF/resources/quartz/404.html");
-        }
+  public void addResourceHandlers(ResourceHandlerRegistry registry) {
+    if (quartzProperties.isEnabled()) {
+      registry.addResourceHandler("quartz/index.html")
+        .addResourceLocations("classpath:/META-INF/resources/");
+      registry.addResourceHandler("quartz/jobrec.html")
+        .addResourceLocations("classpath:/META-INF/resources/");
+
+      registry.addResourceHandler("index.html")
+        .addResourceLocations("classpath:/META-INF/resources/");
+
+    } else {
+      registry.addResourceHandler("quartz/index.html")
+        .addResourceLocations("classpath:/META-INF/resources/quartz/404.html");
     }
+  }
 }

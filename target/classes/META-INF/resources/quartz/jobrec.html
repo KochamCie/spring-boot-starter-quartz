@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Schedule Console</title>
+    <link rel="stylesheet" href="https://unpkg.com/element-ui@2.0.5/lib/theme-chalk/index.css">
+    <script src="https://unpkg.com/vue/dist/vue.js"></script>
+    <script src="http://cdn.bootcss.com/vue-resource/1.3.4/vue-resource.js"></script>
+    <script src="https://unpkg.com/element-ui@2.0.5/lib/index.js"></script>
+
+    <style>
+        .el-table__body-wrapper{
+            overflow: hidden;
+        }
+        .pagination-container {
+            margin-top: 30px;
+        }
+        .filter-container {
+            padding-bottom: 10px;
+        }
+        #test {
+            margin: 20px;
+        }
+        .filter-item {
+            display: inline-block;
+            vertical-align: middle;
+            margin-bottom: 10px;
+        }
+    </style>
+
+</head>
+<body>
+
+
+<div id="test">
+    <el-table
+            :data="tableData"
+            border
+            highlight-current-row
+            :cell-style="cellStyle"
+            style="width: 100%;overflow: hidden">
+        <el-table-column
+                prop="startDate"
+                label="Start Date"
+                sortable
+                >
+        </el-table-column>
+
+        <el-table-column
+                prop="finishDate"
+                label="Finish Date"
+                align="center"
+                format='yyyy-MM-dd'
+                sortable>
+        </el-table-column>
+
+        <el-table-column
+                prop="dataMap"
+                label="Data Map"
+                align="center"
+                sortable>
+        </el-table-column>
+        <el-table-column
+                prop="status"
+                label="Status"
+                align="center"
+                sortable>
+        </el-table-column>
+
+
+        <el-table-column label="actions" width="333px" align="center">
+            <template scope="scope">
+
+
+            </template>
+        </el-table-column>
+    </el-table>
+
+    <div class="pagination-container">
+        <el-pagination
+                @size-change="handleSizeChange"
+                @current-change="handleCurrentChange"
+                :current-page="currentPage"
+                :page-sizes="[10, 20, 30, 40]"
+                :page-size="pagesize"
+                layout="total, sizes, prev, pager, next, jumper"
+                :total="totalCount">
+        </el-pagination>
+    </div>
+
+</div>
+
+<footer align="center">
+    <p>&copy; Quartz Management UI</p>
+</footer>
+
+<script>
+    var vue = new Vue({
+        el: "#test",
+        data: {
+            // current table data
+            tableData: [],
+
+            // page size
+            pagesize: 10,
+
+            currentPage: 1,
+
+            // start page
+            start: 1,
+
+            // total count
+            totalCount: 1000,
+
+            // dialog
+            dialogFormVisible: false,
+
+            // edit dialog
+            updateFormVisible: false,
+
+            listQuery: {
+                title: ''
+            }
+        },
+
+        table :{
+          title : 'title'
+        },
+        methods: {
+
+            // fetch data
+            loadData: function (pageNum, pageSize) {
+                this.$http.get('/record/job/demo2/demo2?' + 'pageNum=' + pageNum + '&pageSize=' + pageSize).then(function (res) {
+                    console.log(res)
+                    this.tableData = res.body.content;
+                    this.totalCount = res.body.totalElements;
+                }, function () {
+                    console.log('failed');
+                });
+            },
+            handleSizeChange: function (val) {
+                this.pagesize = val;
+                this.loadData(this.currentPage, this.pagesize);
+            },
+
+            //
+            handleCurrentChange: function (val) {
+                this.currentPage = val;
+                this.loadData(this.currentPage, this.pagesize);
+            },
+            handlerJobData: function (row, column) {
+                return JSON.stringify(row.jobData);
+            },
+            cellStyle: function({row, column, rowIndex, columnIndex}){
+                console.log("cell style");
+                if(columnIndex === 1 || columnIndex === 6){
+                    return 'background:pink;font-size:12px'
+                }else{
+                    return ''
+                }
+            },
+            handleFilter: function() {
+                this.loadData(1, 20)
+            }
+
+        },
+
+
+    });
+
+    //
+    vue.loadData(vue.currentPage, vue.pagesize);
+</script>
+
+</body>
+</html>
