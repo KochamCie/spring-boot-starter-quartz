@@ -1,5 +1,5 @@
 require('babel-register')
-var config = require('../../config')
+var config = require('../../src/main/frontend/config')
 
 // http://nightwatchjs.org/gettingstarted#settings-file
 module.exports = {

@@ -1,8 +1,10 @@
 'use strict'
 const path = require('path')
 const utils = require('./utils')
-const config = require('../config')
+const config = require('../config/index')
 const vueLoaderConfig = require('./vue-loader.conf')
+const {join} = require('path');
+
 
 function resolve (dir) {
   return path.join(__dirname, '..', dir)
@@ -13,7 +15,7 @@ function resolve (dir) {
 module.exports = {
   context: path.resolve(__dirname, '../'),
   entry: {
-    app: './src/main.js'
+    app: resolve('./main.js')
   },
   output: {
     path: config.build.assetsRoot,
@@ -26,7 +28,8 @@ module.exports = {
     extensions: ['.js', '.vue', '.json'],
     alias: {
       'vue$': 'vue/dist/vue.esm.js',
-      '@': resolve('src'),
+      // '@': resolve('src/main/frontend'),
+      '@': resolve('')
     }
   },
   module: {
@@ -39,7 +42,7 @@ module.exports = {
       {
         test: /\.js$/,
         loader: 'babel-loader',
-        include: [resolve('src'), resolve('test'), resolve('node_modules/webpack-dev-server/client')]
+        include: [resolve('src/main/frontend'), resolve('test'), resolve('node_modules/webpack-dev-server/client')]
       },
       {
         test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
