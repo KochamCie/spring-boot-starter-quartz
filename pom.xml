@@ -229,11 +229,11 @@
                   <goal>copy-resources</goal>
                 </goals>
                 <configuration>
-                  <outputDirectory>src/main/resources/META-INF/resources</outputDirectory>
+                  <outputDirectory>src/main/resources/META-INF/resources/quartz</outputDirectory>
                   <overwrite>true</overwrite>
                   <resources>
                     <resource>
-                      <directory>${project.basedir}/dist/</directory>
+                      <directory>${project.basedir}/dist/quartz</directory>
                       <includes>
                         <include>static/</include>
                         <include>index.html</include>

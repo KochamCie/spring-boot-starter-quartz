@@ -13,7 +13,10 @@
     "build": "node src/main/frontend/build/build.js"
   },
   "dependencies": {
+    "axios": "^0.18.0",
+    "element-ui": "^2.4.11",
     "vue": "^2.5.2",
+    "vue-clickaway": "^2.2.2",
     "vue-router": "^3.0.1"
   },
   "devDependencies": {
