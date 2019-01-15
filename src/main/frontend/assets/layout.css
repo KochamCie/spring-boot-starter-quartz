@@ -1,0 +1,40 @@
+
+.logo {
+  font-size: 1.7rem;
+  font-weight: 600;
+  white-space: nowrap;
+  padding: 0;
+  align-items: center;
+  float: left;
+  margin-left: -1rem;
+  display: flex;
+}
+
+.logo img {
+  height: 2.25rem;
+  max-width: 100%;
+}
+
+.logo span{
+  margin: .5rem 1rem .5rem .5rem;
+  color: white;
+}
+
+.menu {
+  line-height: 2.5;
+  padding: .5rem .75rem;
+  position: relative;
+  color: pink;
+  display: inline-block;
+
+}
+
+a {
+  text-decoration: none;
+}
+
+.app-wrapper .el-col{
+  height: 3.25rem;
+
+}
+
