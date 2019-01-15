@@ -14,8 +14,17 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 public class QuartzProperties {
 
 
-    /**
-     * ui & initial switch, default false.
-     */
-    private boolean enabled = false;
+  /**
+   * ui & initial switch, default false.
+   */
+  private boolean enabled = false;
+
+  /**
+   * root path
+   */
+  @Deprecated
+  private String root = "quartz";
+
+  private boolean recordEnable = false;
+
 }

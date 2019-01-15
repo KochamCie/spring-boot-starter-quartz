@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 /**
  * @author : hama
  * @since : created in  2018/9/22
@@ -26,7 +28,7 @@ public class QuartzAPI {
     private QuartzService quartzService;
 
     /**
-     * job list
+     * paged job list
      *
      * @param pageNum
      * @param pageSize
@@ -73,5 +75,16 @@ public class QuartzAPI {
                                  @RequestParam(value = "option") TriggerOption option) throws SchedulerException {
         return quartzService.triggerOption(jobName, jobGroup, option);
     }
+
+
+  /**
+   * jobs list
+   *
+   * @return
+   */
+  @RequestMapping(method = RequestMethod.GET, value = "/jobs")
+  public List<JobAndTrigger> jobList() {
+    return quartzService.jobList();
+  }
 
 }

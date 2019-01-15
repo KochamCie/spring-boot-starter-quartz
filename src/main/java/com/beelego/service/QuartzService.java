@@ -6,6 +6,8 @@ import com.beelego.support.JobAndTrigger;
 import com.beelego.support.Page;
 import org.quartz.SchedulerException;
 
+import java.util.List;
+
 /**
  * @author : hama
  * @since : created in  2018/9/22
@@ -33,4 +35,7 @@ public interface QuartzService {
     Object triggerOption(String jobName,
                      String jobGroup,
                      TriggerOption option) throws SchedulerException;
+
+    List<JobAndTrigger> jobList();
+
 }

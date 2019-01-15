@@ -22,16 +22,12 @@ public class QuartzUIAutoConfig implements WebMvcConfigurer {
 
   public void addResourceHandlers(ResourceHandlerRegistry registry) {
     if (quartzProperties.isEnabled()) {
-      registry.addResourceHandler("quartz/index.html")
-        .addResourceLocations("classpath:/META-INF/resources/");
-      registry.addResourceHandler("quartz/jobrec.html")
-        .addResourceLocations("classpath:/META-INF/resources/");
-
-      registry.addResourceHandler("index.html")
-        .addResourceLocations("classpath:/META-INF/resources/");
-
+//      registry.addResourceHandler("quartz/index2.html")
+//        .addResourceLocations("classpath:/META-INF/resources/");
+      registry.addResourceHandler(quartzProperties.getRoot())
+        .addResourceLocations("classpath:/META-INF/resources/quartz/index.html");
     } else {
-      registry.addResourceHandler("quartz/index.html")
+      registry.addResourceHandler("quartz/index2.html")
         .addResourceLocations("classpath:/META-INF/resources/quartz/404.html");
     }
   }
