@@ -11,9 +11,13 @@ import axios from 'axios'
 import qs from "qs"
 import global from '@/components/Global'
 import './assets/iconfont/iconfont.css'
+import i18n from './lang' // Internationalization
+
 
 Vue.config.productionTip = false
-Vue.use(ElementUI);
+Vue.use(ElementUI,{
+    i18n: (key, value) => i18n.t(key, value)
+});
 
 Vue.prototype.axios = axios;
 Vue.prototype.qs = qs;
@@ -24,6 +28,7 @@ Vue.prototype.Global = global;
 new Vue({
   el: '#app',
   router,
+  i18n,
   components: {App},
   template: '<App/>'
 })

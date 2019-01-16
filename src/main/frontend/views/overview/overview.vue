@@ -5,7 +5,7 @@
     </el-row>
     <el-row>
       <el-col :span="6">
-        <div><p class="cato">Total</p>
+        <div><p class="cato">{{ $t("message.index") }}</p>
           <p class="title" v-text="totalCount">0</p></div>
       </el-col>
       <el-col :span="6">
