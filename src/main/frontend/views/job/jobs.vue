@@ -9,7 +9,7 @@
           <el-col :span="2">
             <div>
               <span class="iconfont icon-zongshu icon-job-count icon-job-count-position"></span>
-              <p class="margin0 icon-job-count-position">99{{ $t('record.name') }}</p>
+              <p class="margin0 icon-job-count-position">99{{ $t('record.times') }}</p>
             </div>
           </el-col>
           <el-col :span="20" align="left">
