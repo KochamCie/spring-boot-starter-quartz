@@ -30,25 +30,26 @@ public class QuartzAPI {
     /**
      * paged job list
      *
-     * @param pageNum
-     * @param pageSize
-     * @return
+     * @param pageNum pageNum
+     * @param pageSize pageSize
+     * @return object
      */
     @RequestMapping(method = RequestMethod.GET, value = "/job")
     public Page<JobAndTrigger> jobList(@RequestParam(value = "pageNum") Integer pageNum, @RequestParam(value = "pageSize") Integer pageSize) {
         return quartzService.jobList(pageNum, pageSize);
     }
 
-
     /**
      * add or update a job
-     *
-     * @param jobName
-     * @param jobGroup
-     * @param jobClassName
-     * @param cronExpression
-     * @param description
-     * @throws Exception
+     * @param jobName jobName
+     * @param jobGroup jobGroup
+     * @param jobClassName jobClassName
+     * @param cronExpression cronExpression
+     * @param description description
+     * @param jobData jobData
+     * @param option option
+     * @return object object
+     * @throws Exception Exception
      */
     @RequestMapping(method = RequestMethod.POST, value = "/job")
     public Object addSchedule(@RequestParam(value = "jobName") String jobName,
@@ -63,11 +64,11 @@ public class QuartzAPI {
 
 
     /**
-     * @param jobName
-     * @param jobGroup
-     * @param option
-     * @return
-     * @throws SchedulerException
+     * @param jobName jobName
+     * @param jobGroup jobGroup
+     * @param option option
+     * @return Object Object
+     * @throws SchedulerException SchedulerException
      */
     @RequestMapping(method = RequestMethod.PUT, value = "/trigger")
     public Object updateSchedule(@RequestParam(value = "jobName") String jobName,
@@ -80,7 +81,7 @@ public class QuartzAPI {
   /**
    * jobs list
    *
-   * @return
+   * @return object
    */
   @RequestMapping(method = RequestMethod.GET, value = "/jobs")
   public List<JobAndTrigger> jobList() {

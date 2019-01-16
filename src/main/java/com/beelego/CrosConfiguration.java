@@ -7,8 +7,8 @@
 //import org.springframework.web.filter.CorsFilter;
 //
 ///**
-// * @Author: rns
-// * @Date: 2019/1/13 下午8:40
+// * @author: rns
+// * @since: 2019/1/13 下午8:40
 // * @Description: CrosConfiguration
 // */
 //@Configuration

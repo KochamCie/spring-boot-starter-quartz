@@ -5,9 +5,8 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
- * @Author: rns
- * @Date: 2019/1/6 下午10:37
- * @Description: DateUtil
+ * @author: rns
+ * @since : 2019/1/6 下午10:37
  */
 public class DateUtil {
 

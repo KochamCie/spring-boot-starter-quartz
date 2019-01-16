@@ -95,10 +95,10 @@ public class QuartzServiceImpl implements QuartzService {
   /**
    * common
    *
-   * @param jobName
-   * @param jobGroup
-   * @param option
-   * @throws SchedulerException
+   * @param jobName jobName
+   * @param jobGroup jobGroup
+   * @param option option
+   * @throws SchedulerException SchedulerException
    */
   @Override
   public Object triggerOption(String jobName,

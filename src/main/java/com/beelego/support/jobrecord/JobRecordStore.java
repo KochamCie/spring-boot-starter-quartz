@@ -18,9 +18,8 @@ import java.util.Date;
 import java.util.List;
 
 /**
- * @Author: rns
- * @Date: 2019/1/5 下午4:50
- * @Description: JobRecordStore
+ * @author : rns
+ * @since : 2019/1/5 下午4:50
  */
 @Slf4j
 @Component

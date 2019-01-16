@@ -7,9 +7,8 @@ import lombok.Data;
 import java.util.Date;
 
 /**
- * @Author: rns
- * @Date: 2019/1/5 下午4:31
- * @Description: JobRecord
+ * @author : rns
+ * @since : 2019/1/5 下午4:31
  */
 @Data
 @AllArgsConstructor

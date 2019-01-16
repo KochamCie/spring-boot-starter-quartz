@@ -30,8 +30,8 @@ public abstract class KochamcieJobBean extends QuartzJobBean {
      * IPS:     if you wanna some specific ip execute
      * FORCE:   if you wanna force execute this job
      *
-     * @param jobExecutionContext
-     * @return
+     * @param jobExecutionContext jobExecutionContext
+     * @return boolean
      */
     public boolean executableQuartz(JobExecutionContext jobExecutionContext) {
         JobDataMap jobDataMap = jobExecutionContext.getMergedJobDataMap();
@@ -73,8 +73,8 @@ public abstract class KochamcieJobBean extends QuartzJobBean {
     /**
      * the PAGENO in current job's jobExecutionContext
      *
-     * @param jobExecutionContext
-     * @return
+     * @param jobExecutionContext jobExecutionContext
+     * @return int
      */
     public int executePageNo(JobExecutionContext jobExecutionContext) {
         JobDataMap jobDataMap = jobExecutionContext.getMergedJobDataMap();
@@ -93,8 +93,8 @@ public abstract class KochamcieJobBean extends QuartzJobBean {
     /**
      * the PAGESIZE in current job's jobExecutionContext
      *
-     * @param jobExecutionContext
-     * @return
+     * @param jobExecutionContext jobExecutionContext
+     * @return int
      */
     public int executePageSize(JobExecutionContext jobExecutionContext) {
         JobDataMap jobDataMap = jobExecutionContext.getMergedJobDataMap();

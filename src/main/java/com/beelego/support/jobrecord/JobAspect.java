@@ -16,9 +16,8 @@ import java.util.List;
 import java.util.UUID;
 
 /**
- * @Author: rns
- * @Date: 2019/1/4 下午7:21
- * @Description: JobAspect
+ * @author : rns
+ * @since : 2019/1/4 下午7:21
  */
 @Slf4j
 @Aspect

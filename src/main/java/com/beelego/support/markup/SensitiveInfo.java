@@ -19,7 +19,7 @@ public @interface SensitiveInfo {
     /**
      * 敏感信息类型
      *
-     * @return
+     * @return SensitiveType
      */
     SensitiveType type() default SensitiveType.TODATESTR;
 }

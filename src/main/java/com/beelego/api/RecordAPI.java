@@ -11,9 +11,8 @@ import org.springframework.web.bind.annotation.*;
 import java.sql.SQLException;
 
 /**
- * @Author: rns
- * @Date: 2019/1/5 下午10:06
- * @Description: JobAPI
+ * @author: rns
+ * @since: 2019/1/5 下午10:06
  */
 @Slf4j
 @RestController
@@ -23,6 +22,15 @@ public class RecordAPI {
     @Autowired
     JobRecordStore jobRecordStore;
 
+  /**
+   *
+   * @param pageNum pageNum
+   * @param pageSize pageSize
+   * @param jobName jobName
+   * @param jobGroup  jobGroup
+   * @return object
+   * @throws SQLException SQLException
+   */
     @RequestMapping(method = RequestMethod.GET, value = "/job/{jobName}/{jobGroup}")
     public Page<JobRecord> recordList(@RequestParam(value = "pageNum", defaultValue = "1") Integer pageNum,
                                       @RequestParam(value = "pageSize", defaultValue = "10") Integer pageSize,

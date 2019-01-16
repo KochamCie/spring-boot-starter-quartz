@@ -26,11 +26,11 @@ public interface QuartzService {
 
     /**
      *
-     * @param jobName
-     * @param jobGroup
-     * @param option
-     * @return
-     * @throws SchedulerException
+     * @param jobName jobName
+     * @param jobGroup jobGroup
+     * @param option option
+     * @return Object
+     * @throws SchedulerException SchedulerException
      */
     Object triggerOption(String jobName,
                      String jobGroup,

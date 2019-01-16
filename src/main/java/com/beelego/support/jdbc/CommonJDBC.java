@@ -5,9 +5,8 @@ import java.util.Calendar;
 import java.util.TimeZone;
 
 /**
- * @Author: rns
- * @Date: 2019/1/5 下午4:27
- * @Description: CommonJDBC
+ * @author: rns
+ * @since: 2019/1/5 下午4:27
  */
 public class CommonJDBC {
 
