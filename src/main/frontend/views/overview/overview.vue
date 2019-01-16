@@ -1,23 +1,21 @@
 <template>
   <div>
-    <el-row>
-      <el-col :span="24"></el-col>
-    </el-row>
-    <el-row>
+
+    <el-row style="margin-top: 3.25rem;">
       <el-col :span="6">
-        <div><p class="cato">{{ $t("message.index") }}</p>
+        <div><p class="cato">{{ $t("overview.total") }}</p>
           <p class="title" v-text="totalCount">0</p></div>
       </el-col>
       <el-col :span="6">
-        <div><p class="cato">Normal</p>
+        <div><p class="cato">{{ $t("overview.normal") }}</p>
           <p class="title" v-text="normalCount">0</p></div>
       </el-col>
       <el-col :span="6">
-        <div><p class="cato">Paused</p>
+        <div><p class="cato">{{ $t("overview.paused") }}</p>
           <p class="title" v-text="pausedCount">0</p></div>
       </el-col>
       <el-col :span="6">
-        <div><p class="cato">error</p>
+        <div><p class="cato">{{ $t("overview.error") }}</p>
           <p class="title" v-text="errorCount">0</p></div>
       </el-col>
     </el-row>

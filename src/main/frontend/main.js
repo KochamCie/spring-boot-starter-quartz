@@ -12,12 +12,11 @@ import qs from "qs"
 import global from '@/components/Global'
 import './assets/iconfont/iconfont.css'
 import i18n from './lang' // Internationalization
+import Cookies from 'js-cookie'
 
 
 Vue.config.productionTip = false
-Vue.use(ElementUI,{
-    i18n: (key, value) => i18n.t(key, value)
-});
+Vue.use(ElementUI);
 
 Vue.prototype.axios = axios;
 Vue.prototype.qs = qs;
@@ -29,6 +28,7 @@ new Vue({
   el: '#app',
   router,
   i18n,
+  Cookies,
   components: {App},
   template: '<App/>'
 })

@@ -9,7 +9,7 @@
           <el-col :span="2">
             <div>
               <span class="iconfont icon-zongshu icon-job-count icon-job-count-position"></span>
-              <p class="margin0 icon-job-count-position">99次</p>
+              <p class="margin0 icon-job-count-position">99{{ $t('record.name') }}</p>
             </div>
           </el-col>
           <el-col :span="20" align="left">
@@ -37,14 +37,14 @@
         <el-form ref="updateform" label-width="80px">
           <el-row>
             <el-col :span="6">
-              <el-form-item label="cron:"  >
+              <el-form-item :label="$t('job.cron')"  >
                 <el-input :class="{'job-input': edits['jobCron'] === true}"
                           v-model="updateform.cronExpression"
                           @focus="show('jobCron')"></el-input>
               </el-form-item>
             </el-col>
             <el-col :span="15">
-              <el-form-item label="remark:">
+              <el-form-item :label="$t('job.description')">
                 <el-input :class="{'job-input': edits['jobDescription'] === true}"
                           v-model="updateform.description"
                           @focus="show('jobDescription')"></el-input>
@@ -58,7 +58,7 @@
           <el-row>
             <el-col :span="21">
 
-              <el-form-item label="jobData:">
+              <el-form-item :label="$t('job.data')">
 
                 <el-input :class="{'job-input': edits['jobData'] === true}"
                           v-model="updateform.jobData"
@@ -76,27 +76,27 @@
 
 
 
-    <el-dialog title="Add Quartz Job" :visible.syn="dialogFormVisible" @close='dialogFormVisible = false'>
+    <el-dialog :title="$t('job_dialog.add')" :visible.syn="dialogFormVisible" @close='dialogFormVisible = false'>
       <el-form :model="form">
-        <el-form-item label="Job Name" label-width="120px" style="width:66%">
+        <el-form-item :label="$t('job.name')" label-width="120px" style="width:66%">
           <el-input v-model="form.jobName" auto-complete="off"></el-input>
         </el-form-item>
-        <el-form-item label="Job Group" label-width="120px" style="width:66%">
+        <el-form-item :label="$t('job.group')" label-width="120px" style="width:66%">
           <el-input v-model="form.jobGroup" auto-complete="off"></el-input>
         </el-form-item>
-        <el-form-item label="Target" label-width="120px" style="width:66%">
+        <el-form-item :label="$t('job.className')" label-width="120px" style="width:66%">
           <el-input v-model="form.jobClassName" auto-complete="off"></el-input>
         </el-form-item>
-        <el-form-item label="Cron" label-width="120px" style="width:66%">
+        <el-form-item :label="$t('job.cron')" label-width="120px" style="width:66%">
           <el-input v-model="form.cronExpression" auto-complete="off"></el-input>
         </el-form-item>
-        <el-form-item label="Description" label-width="120px" style="width:66%">
+        <el-form-item :label="$t('job.description')" label-width="120px" style="width:66%">
           <el-input v-model="form.description" auto-complete="off"></el-input>
         </el-form-item>
       </el-form>
       <div slot="footer" class="dialog-footer">
-        <el-button @click="dialogFormVisible = false">Cancel</el-button>
-        <el-button type="primary" @click="jobAdd(form, 'SCHEDULE')">Confirm</el-button>
+        <el-button @click="dialogFormVisible = false">{{ $t('dialog.cancel') }}</el-button>
+        <el-button type="primary" @click="jobAdd(form, 'SCHEDULE')">{{ $t('dialog.confirm') }}</el-button>
       </div>
     </el-dialog>
   </div>
