@@ -17,7 +17,7 @@
             <span class="white" @click.stop="switchLanguage">
               <span :class="{'fs18':fs18 === true,'fs12':fs12 === true}" >中</span>
               <span class="separator">/</span>
-              <span :class="{'fs18':fs18 === false,'fs12':fs12 === false}">英</span>
+              <span :class="{'fs18':fs18 === false,'fs12':fs12 === false}">En</span>
             </span>
 
           </el-col>
